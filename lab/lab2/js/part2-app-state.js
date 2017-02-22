@@ -32,11 +32,48 @@
        var one = justOne();
 ===================== */
 
+var phillySolarInstallationDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-solar-installations.json";
+var phillyCrimeDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-crime-snippet.json";
+var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json";
+
+
+// $.ajax(phillySolarInstallationDataUrl).done(function(ajaxResponseValue) {
+//   // a function that does some kind of transformation on the response
+//   var computedValue = JSON.parse(ajaxResponseValue);
+//   // Logging our computed result (within the body of the ajax function)
+//   console.log(computedValue);
+//   _.map(computedValue, function(x){L.marker([x.LAT, x.LONG_]).addTo(map);});
+// });
+
+
 // We set this to HTTP to prevent 'CORS' issues
-var downloadData = $.ajax("http://");
-var parseData = function() {};
-var makeMarkers = function() {};
-var plotMarkers = function() {};
+var downloadData = $.ajax(phillySolarInstallationDataUrl);
+var parseData = function(data) {
+  return JSON.parse(data);
+};
+
+var makeMarkers = function(parsedData) {
+  return _.map(parsedData, function(i){
+    return L.marker([i.LAT, i.LONG_]);
+  });
+};
+
+
+//
+// +// define marker function
+//  +var makeMarkers = function(data2) {
+//  +  return _.map(data2, function(crimes) {
+//    +    return L.marker([crimes.Lat, crimes.Lng]);
+//  +  });
+//  +};
+
+
+
+var plotMarkers = function(markers) {
+  return _.map(markers,function(i){
+    i.addTo(map);
+  });
+};
 
 
 /* =====================
@@ -52,7 +89,11 @@ var plotMarkers = function() {};
   user's input.
 ===================== */
 
-var removeMarkers = function() {};
+var removeMarkers = function(markers) {
+  return _.map(markers,function(i){
+    map.removeLayer(i);
+  });
+};
 
 /* =====================
   Optional, stretch goal

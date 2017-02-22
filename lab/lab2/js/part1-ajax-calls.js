@@ -19,7 +19,7 @@
   This recipe, can be used by underscore's _.filter. It will return only words with
    >=5 characters.
 ===================== */
-var isLengthOfFiveOrMore = function(str) {};
+isLengthOfFiveOrMore = function(str) {return str.length>=5;};
 
 console.log("isLengthOfFiveOrMore success:",
   _.isEqual(_.filter(['this', 'is','a', 'test', 'testing'], isLengthOfFiveOrMore), ['testing']));
@@ -30,26 +30,31 @@ console.log("isLengthOfFiveOrMore success:",
   function you write along with underscore's _.each to log the double of every
   number in the provided array.
 ===================== */
-var logDouble = function(num) {};
+var logDouble = function(num) {
+  console.log(num * 2)};
+
 var theArray = [1, 5, 20, 100];
+
+_.each(theArray, logDouble)
 
 
 /* =====================
   Given this already defined function, define fizzbuzzArray so that, when mapped
   over, it will equal ['fizz', 'buzz', 'fizzbuzz'];
 ===================== */
-var fizzbuzzArray = [];
+var fizzbuzzArray = [3,5,15];
 var fizzbuzzFunc = function(num) {
   var str = '';
   if (num % 3 === 0) { str = 'fizz'; }
   if (num % 5 === 0) { str += 'buzz'; }
-  if (str === '') { str = num.toString(); }
+  if (str === '') { str = num; }
   return str;
+  console.log(str);
 };
 
 console.log("fizzbuzz success:",
   _.isEqual(_.map(fizzbuzzArray, fizzbuzzFunc), ['fizz', 'buzz', 'fizzbuzz']));
-
+console.log(_.map(fizzbuzzArray, fizzbuzzFunc))
 
 /* =====================
   Writing ajax calls works very much like these higher order functions from
@@ -94,6 +99,14 @@ var phillySolarInstallationDataUrl = "https://raw.githubusercontent.com/CPLN692-
 var phillyCrimeDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-crime-snippet.json";
 var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json";
 
+
+$.ajax(phillySolarInstallationDataUrl).done(function(ajaxResponseValue) {
+  // a function that does some kind of transformation on the response
+  var computedValue = JSON.parse(ajaxResponseValue);
+  // Logging our computed result (within the body of the ajax function)
+  console.log(computedValue);
+  _.map(computedValue, function(x){L.marker([x.LAT, x.LONG_]).addTo(map);});
+});
 
 /* =====================
   Data you grab through ajax is just text. You'll need to parse it as javascript

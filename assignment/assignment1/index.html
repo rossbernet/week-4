@@ -50,10 +50,49 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+      <h3 class = "hide-text">
+        <!-- <form action= "submit-hide-filters"> -->
+        <button id="button1" type="Hide Filters">Hide Filters</button>
+      </form>
+      </h3>
 
-      <!-- =====================
-      Add HTML!
-      ====================== -->
+        <h2 id="main-heading1"> <i>Filters</i></h2>
+
+        <p> <h3 id="main-heading2">By Name</h3>
+        <input id="text-input" class="input-text" type="text" placeholder="text here" value="">
+        <p> <h3 id="main-heading3">By Grade</h3>
+
+        <form id="submit-by-name" action="submit-by-name">
+          <select>
+            <option> All Grades          </option>
+            <option> High School         </option>
+            <option> Middle School       </option>
+            <option> Elementary School   </option>
+          </select>  <br>
+        </form>
+
+        <p> <div id="separator"></div>
+
+        <h2 id="Schools">Schools</h2>
+
+        <div class="box">
+          <h2>Charles School </h2>
+          <h3>Elem/Middle</h3>
+          <p>601 Carpenter La.</p>
+          <p>19119-3405</p>
+        </div>
+        <div class="box">
+          <h2>Universal Creighten Charter School</h2>
+          <h3>Elem/Middle</h3>
+          <p>5401 Tabor Ave</p>
+          <p>19120-3614</p>
+        </div>
+        <div class="box">
+          <h2>Dupont Middle School</h2>
+          <h3>Elem/Middle</h3>
+          <p>3321 Chestnut St</p>
+          <p>19104-3412</p>
+        </div>
 
     </div>
     <!-- Map -->
@@ -62,6 +101,7 @@
     <!-- Javascript Imports -->
     <script src="js/leaflet.js"></script>
     <script src="js/underscore.js"></script>
+    <script src="js/jquery-2.2.0.js"></script>
 
     <!-- Javascript Code -->
     <script>
@@ -76,6 +116,16 @@
       	maxZoom: 20,
       	ext: 'png'
       }).addTo(map);
+
+      $(function() {
+        $('#button1').on('click', function() {
+          $("#main-heading1").toggle();
+          $("#main-heading2").toggle();
+          $("#main-heading3").toggle();
+          $("#text-input").toggle();
+          $("#submit-by-name").toggle();
+        });
+      });
     </script>
   </body>
 </html>
